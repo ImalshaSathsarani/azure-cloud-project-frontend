@@ -601,12 +601,182 @@
 // }
 
 // export default App;
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import "./App.css";
+
+// // ⚠️ REMEMBER: When deploying to production, change this local address 
+// // to your live Azure App Service Backend URL (e.g., https://your-backend.azurewebsites.net)
+// const API_BASE_URL = "https://azure-cloud-notes-backend-api-accag7f4dhhzasbu.malaysiawest-01.azurewebsites.net";
+
+// function App() {
+//   const [notes, setNotes] = useState([]);
+//   const [title, setTitle] = useState("");
+//   const [description, setDescription] = useState("");
+//   const [image, setImage] = useState(null); 
+//   const [loading, setLoading] = useState(false);
+
+//   // Function to load notes from the API
+//   const loadNotes = async () => {
+//     try {
+//       const res = await axios.get(`${API_BASE_URL}/notes`);
+//       setNotes(res.data);
+//     } catch (err) {
+//       console.error("Error loading notes from data pool:", err);
+//     }
+//   };
+
+//   useEffect(() => {
+//     loadNotes();
+//   }, []);
+
+//   const addNote = async (e) => {
+//     e.preventDefault(); 
+//     if (!title.trim() || !description.trim()) {
+//       alert("Please provide both a title and description.");
+//       return;
+//     }
+
+//     setLoading(true);
+
+//     const formData = new FormData();
+//     formData.append("title", title);
+//     formData.append("description", description);
+    
+//     if (image) {
+//       formData.append("image", image); 
+//     }
+
+//     try {
+//       await axios.post(`${API_BASE_URL}/notes`, formData, {
+//         headers: {
+//           "Content-Type": "multipart/form-data", 
+//         },
+//       });
+
+//       setTitle("");
+//       setDescription("");
+//       setImage(null);
+      
+//       const fileInput = document.getElementById("file-picker");
+//       if (fileInput) fileInput.value = "";
+
+//       loadNotes();
+//     } catch (err) {
+//       console.error("Failed to commit payload to cloud pipeline:", err);
+//       alert("Error saving note asset.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const deleteNote = async (id) => {
+//     try {
+//       await axios.delete(`${API_BASE_URL}/notes/${id}`);
+//       loadNotes();
+//     } catch (err) {
+//       console.error("Failed to delete record element:", err);
+//     }
+//   };
+
+//   const hasNotes = notes.length > 0;
+
+//   return (
+//     <div className="container">
+//       <div className="hero">
+//         <h1>☁️ Cloud Notes Manager</h1>
+//         <p>Azure Full Stack Deployment Demo</p>
+//       </div>
+
+//       {/* Dynamic Master Wrapper Layout */}
+//       <div className={`workspace-layout ${hasNotes ? "split-view" : "centered-view"}`}>
+        
+//         {/* Creation Entry Form Portal Block */}
+//         <div className="form-card">
+//           <h2>Create Cloud Note</h2>
+//           <form onSubmit={addNote}>
+//             <input
+//               type="text"
+//               placeholder="Title"
+//               value={title}
+//               onChange={(e) => setTitle(e.target.value)}
+//               required
+//             />
+
+//             <textarea
+//               placeholder="Description"
+//               value={description}
+//               onChange={(e) => setDescription(e.target.value)}
+//               required
+//             />
+
+//             <div className="file-input-wrapper">
+//               <label htmlFor="file-picker" className="file-label">
+//                 Attach Asset Reference (Azure Blob Upload):
+//               </label>
+//               <input
+//                 id="file-picker"
+//                 type="file"
+//                 accept="image/*"
+//                 onChange={(e) => setImage(e.target.files[0])}
+//               />
+//             </div>
+
+//             <button type="submit" disabled={loading}>
+//               {loading ? "Uploading to Cloud..." : "Add Note"}
+//             </button>
+//           </form>
+//         </div>
+
+//         {/* Dynamic Target Stream Block */}
+//         {hasNotes && (
+//           <div className="notes-stream-panel">
+//             <h2>Synchronized Repositories ({notes.length})</h2>
+//             <div className="notes-vertical-stack">
+//               {notes.map((note) => (
+//                 <div className="card" key={note.id}>
+                  
+//                   <div className="card-header">
+//                     <h3>{note.title}</h3>
+//                   </div>
+
+//                   {/* FIXED: Changed from note.imageUrl to note.image_url */}
+//                   {note.image_url && (
+//                     <div className="card-image-wrapper">
+//                       <img 
+//                         src={note.image_url} 
+//                         alt={note.title} 
+//                         className="note-image" 
+//                       />
+//                     </div>
+//                   )}
+
+//                   <div className="card-content">
+//                     <p>{note.description}</p>
+//                     <div className="card-actions">
+//                       <button onClick={() => deleteNote(note.id)} className="delete-btn">
+//                         Delete Note
+//                       </button>
+//                     </div>
+//                   </div>
+
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "react";
 import "./App.css";
 
-// ⚠️ REMEMBER: When deploying to production, change this local address 
-// to your live Azure App Service Backend URL (e.g., https://your-backend.azurewebsites.net)
+// ⚠️ REMEMBER: When deploying to production, keep your live Azure App Service Backend URL active
 const API_BASE_URL = "https://azure-cloud-notes-backend-api-accag7f4dhhzasbu.malaysiawest-01.azurewebsites.net";
 
 function App() {
@@ -688,10 +858,10 @@ function App() {
         <p>Azure Full Stack Deployment Demo</p>
       </div>
 
-      {/* Dynamic Master Wrapper Layout */}
-      <div className={`workspace-layout ${hasNotes ? "split-view" : "centered-view"}`}>
+      {/* Structured Vertical Stack Workspace */}
+      <div className="workspace-layout vertical-stack-view">
         
-        {/* Creation Entry Form Portal Block */}
+        {/* Creation Entry Form Portal Block (Always Centered) */}
         <div className="form-card">
           <h2>Create Cloud Note</h2>
           <form onSubmit={addNote}>
@@ -728,7 +898,7 @@ function App() {
           </form>
         </div>
 
-        {/* Dynamic Target Stream Block */}
+        {/* Target Stream Block - Renders directly below the creation portal */}
         {hasNotes && (
           <div className="notes-stream-panel">
             <h2>Synchronized Repositories ({notes.length})</h2>
@@ -740,7 +910,6 @@ function App() {
                     <h3>{note.title}</h3>
                   </div>
 
-                  {/* FIXED: Changed from note.imageUrl to note.image_url */}
                   {note.image_url && (
                     <div className="card-image-wrapper">
                       <img 

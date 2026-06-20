@@ -32,27 +32,19 @@ body {
   margin-top: 5px;
 }
 
-/* --- Responsive Matrix Layout Grid Configurations --- */
-.workspace-layout {
-  transition: all 0.4s ease-in-out;
-}
-
-/* Initial Layout Option: Centers the creation card when zero nodes exist */
-.centered-view {
-  max-width: 550px;
-  margin: 0 auto;
-}
-
-/* Active Layout Option: Automatically generates split workspace view columns */
-.split-view {
-  display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: 40px;
-  align-items: start;
+/* --- Refactored Centralized Timeline Layout --- */
+.vertical-stack-view {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;         /* Generates clean uniform breathing room between form and notes */
+  max-width: 680px;  /* Keeps the portal and cards tightly bounded and modern */
+  margin: 0 auto;    /* Perfectly locks the alignment dead center in the container */
+  animation: fadeIn 0.4s ease-in-out;
 }
 
 /* --- Entry Portal Elements (Form Styling) --- */
 .form-card {
+  width: 100%;
   background: #1e293b;
   padding: 30px;
   border-radius: 20px;
@@ -145,7 +137,11 @@ button:disabled {
   color: white;
 }
 
-/* --- Stream Output Matrix (Right Panel View) --- */
+/* --- Stream Output Panel (Below Portal View) --- */
+.notes-stream-panel {
+  width: 100%;
+}
+
 .notes-stream-panel h2 {
   font-size: 1.4rem;
   margin-bottom: 20px;
@@ -153,11 +149,11 @@ button:disabled {
   padding-bottom: 10px;
 }
 
-/* Vertical Stacking: Forces active notes to render one below the other */
+/* Vertical Stacking Feed Layer */
 .notes-vertical-stack {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px; /* Even grid gaps as cards render straight down */
 }
 
 /* --- Premium Custom Card Framework --- */
@@ -171,7 +167,7 @@ button:disabled {
   flex-direction: column;
 }
 
-/* Step 1 Typography: Title at the Top with distinct scale */
+/* Step 1 Typography: Title at the Top */
 .card-header {
   padding: 20px 24px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -187,7 +183,7 @@ button:disabled {
 /* Step 2 Layout: Embedded Object Layer */
 .card-image-wrapper {
   width: 100%;
-  max-height: 400px; /* Constrains height on large monitors */
+  max-height: 400px;
   overflow: hidden;
   background: #0f172a;
   display: flex;
@@ -199,7 +195,7 @@ button:disabled {
   width: 100%;
   height: auto;
   max-height: 400px;
-  object-fit: cover; /* Prevents dimensional distortion stretching */
+  object-fit: cover;
 }
 
 /* Step 3 Layout: Contextual Description Panel */
@@ -211,11 +207,17 @@ button:disabled {
   color: #cbd5e1;
   font-size: 1.05rem;
   line-height: 1.6;
-  white-space: pre-wrap; /* Keeps user input line breaks working */
+  white-space: pre-wrap;
   margin-bottom: 20px;
 }
 
 .card-actions {
   display: flex;
   justify-content: flex-end;
+}
+
+/* Smooth Fade-in Animation for Layout Shift Transition */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
