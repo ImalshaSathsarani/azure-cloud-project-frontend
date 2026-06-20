@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.hero p {
+  color: #94a3b8;
+  margin-top: 5px;
+}
+
+/* --- Responsive Matrix Layout Grid Configurations --- */
+.workspace-layout {
+  transition: all 0.4s ease-in-out;
+}
+
+/* Initial Layout Option: Centers the creation card when zero nodes exist */
+.centered-view {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* Active Layout Option: Automatically generates split workspace view columns */
+.split-view {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* --- Entry Portal Elements (Form Styling) --- */
+.form-card {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.form-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #3b82f6;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: #0f172a;
+  color: white;
+  font-size: 0.95rem;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+.file-input-wrapper {
+  margin: 5px 0 20px 0;
+}
+
+.file-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+}
+
+/* --- Buttons Configuration --- */
+button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button:disabled {
+  background: #64748b;
+  cursor: not-allowed;
+}
+
+.delete-btn {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  width: auto;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.delete-btn:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* --- Stream Output Matrix (Right Panel View) --- */
+.notes-stream-panel h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+/* Vertical Stacking: Forces active notes to render one below the other */
+.notes-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* --- Premium Custom Card Framework --- */
+.card {
+  background: #1e293b;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step 1 Typography: Title at the Top with distinct scale */
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.card-header h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.5px;
+}
+
+/* Step 2 Layout: Embedded Object Layer */
+.card-image-wrapper {
+  width: 100%;
+  max-height: 400px; /* Constrains height on large monitors */
+  overflow: hidden;
+  background: #0f172a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover; /* Prevents dimensional distortion stretching */
+}
+
+/* Step 3 Layout: Contextual Description Panel */
+.card-content {
+  padding: 24px;
+}
+
+.card-content p {
+  color: #cbd5e1;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  white-space: pre-wrap; /* Keeps user input line breaks working */
+  margin-bottom: 20px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
