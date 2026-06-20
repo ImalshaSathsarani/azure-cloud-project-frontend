@@ -773,7 +773,7 @@
 
 // export default App;
 import { useEffect, useState } from "react";
-import axios from "react";
+import axios from "axios";
 import "./App.css";
 
 // ⚠️ REMEMBER: When deploying to production, keep your live Azure App Service Backend URL active
