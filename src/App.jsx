@@ -607,7 +607,7 @@ import "./App.css";
 
 // ⚠️ REMEMBER: When deploying to production, change this local address 
 // to your live Azure App Service Backend URL (e.g., https://your-backend.azurewebsites.net)
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://azure-cloud-notes-backend-api-accag7f4dhhzasbu.malaysiawest-01.azurewebsites.net";
 
 function App() {
   const [notes, setNotes] = useState([]);
